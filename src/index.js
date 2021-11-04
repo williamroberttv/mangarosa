@@ -1,11 +1,6 @@
 const express = require("express");
+const api = express();
+const routes = require("./routes");
 
-const app = express();
-
-app.get("/", (request, response) => {
-  return response.json({ message: "Back-end" });
-});
-
-app.listen(3333, () => {
-  console.log("✔ Back-end iniciou!");
-});
+api.use(routes);
+api.listen(3333, () => console.log("✔ Back-end iniciou!"));
