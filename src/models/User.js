@@ -8,6 +8,7 @@ class User extends Model {
         email: DataTypes.STRING,
         cpf: DataTypes.STRING,
         cellphone: DataTypes.STRING,
+        validate: DataTypes.BOOLEAN,
         knowledges: DataTypes.ARRAY(
           DataTypes.ENUM([
             "git",
