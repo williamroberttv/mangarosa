@@ -10,6 +10,10 @@ class User extends Model {
             notEmpty: {
               msg: "O campo name está vazio.",
             },
+            len: {
+              args: [0, 100],
+              msg: "O campo name deve ter no máximo 100 caracteres.",
+            },
           },
         },
         email: {
@@ -21,6 +25,10 @@ class User extends Model {
             notEmpty: {
               msg: "O campo email é obrigatório.",
             },
+            len: {
+              args: [0, 100],
+              msg: "O campo email deve ter no máximo 100 caracteres.",
+            },
           },
         },
         cpf: {
@@ -28,10 +36,14 @@ class User extends Model {
           validate: {
             is: {
               args: /^\d{3}\x2E\d{3}\x2E\d{3}\x2D\d{2}$/,
-              msg: "O cpf não é válido. O campo cpf deve conter 14 caracteres.",
+              msg: "O cpf não é válido.",
             },
             notEmpty: {
               msg: "O campo cpf é obrigatório.",
+            },
+            len: {
+              args: [14, 14],
+              msg: "O campo cpf deve ter 14 caracteres.",
             },
           },
         },
