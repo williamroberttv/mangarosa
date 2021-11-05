@@ -62,7 +62,7 @@ module.exports = {
           { validate: validateStatus },
           {
             where: {
-              name: str,
+              name: validName,
             },
           }
         );
