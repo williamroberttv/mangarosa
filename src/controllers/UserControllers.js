@@ -30,9 +30,8 @@ module.exports = {
     const { name } = await req.params;
 
     function getValidName(str) {
-      if (str.includes("-")) {
-        const arr = str.split("-");
-        console.log(arr);
+      if (str.includes("_")) {
+        const arr = str.split("_");
         for (var i = 0; i < arr.length; i++) {
           arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
         }
@@ -44,22 +43,24 @@ module.exports = {
 
     const validName = getValidName(name);
     try {
-      const user = await User.findOne({
+      const { updated_at, validate } = await User.findOne({
         raw: true,
         where: {
           name: validName,
         },
       });
 
-      const validateStatus = true;
-
-      if (user.validate) {
-        return res.status(500).send("Usuário já validado");
+      if (validate) {
+        return res.status(500).json({
+          error: "Usuário já registrou o ponto",
+          validate,
+          registred_at: Date(updated_at),
+        });
       }
 
       const update = () => {
         User.update(
-          { validate: validateStatus },
+          { validate: true },
           {
             where: {
               name: validName,
@@ -69,7 +70,7 @@ module.exports = {
       };
       update();
 
-      return res.status(200).send("Usuário validado com sucesso!");
+      return res.status(200).send("Usuário registrou o ponto com sucesso!");
     } catch (err) {
       return res.status(500).send("Something went wrong!");
     }
