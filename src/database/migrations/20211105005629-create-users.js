@@ -25,18 +25,18 @@ module.exports = {
       },
       cellphone: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       knowledges: {
         type: Sequelize.ARRAY(
           Sequelize.ENUM([
-            "git",
-            "react",
-            "php",
-            "nodeJS",
-            "devops",
-            "banco de dados",
-            "typescript",
+            "Git",
+            "React",
+            "PHP",
+            "NodeJS",
+            "DevOps",
+            "Banco de Dados",
+            "Typescript",
           ])
         ),
         allowNull: false,
@@ -44,7 +44,6 @@ module.exports = {
       validate: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false,
       },
       created_at: {
         type: Sequelize.DATE,
