@@ -29,36 +29,49 @@ module.exports = {
   async update(req, res) {
     const { name } = await req.params;
 
-    function validName() {
-      const arr = name.split("-");
-
-      for (var i = 0; i < arr.length; i++) {
-        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    function getValidName(str) {
+      if (str.includes("-")) {
+        const arr = str.split("-");
+        console.log(arr);
+        for (var i = 0; i < arr.length; i++) {
+          arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+        }
+        const formatedStr = arr.join(" ");
+        return formatedStr;
       }
-      const formatedStr = arr.join(" ");
-      return formatedStr;
+      return str;
     }
 
-    const user = await User.findOne({
-      where: {
-        name: validName(),
-      },
-    });
-    const validateStatus = true;
-
-    if (!user.validate) {
-      return res.status(500).send("Usuário já validado");
-    }
-
-    User.update(
-      { validate: validateStatus },
-      {
+    const validName = getValidName(name);
+    try {
+      const user = await User.findOne({
+        raw: true,
         where: {
-          name,
+          name: validName,
         },
-      }
-    );
+      });
 
-    return res.send("Usuário validado com sucesso!");
+      const validateStatus = true;
+
+      if (user.validate) {
+        return res.status(500).send("Usuário já validado");
+      }
+
+      const update = () => {
+        User.update(
+          { validate: validateStatus },
+          {
+            where: {
+              name: str,
+            },
+          }
+        );
+      };
+      update();
+
+      return res.status(200).send("Usuário validado com sucesso!");
+    } catch (err) {
+      return res.status(500).send("Something went wrong!");
+    }
   },
 };
