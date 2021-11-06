@@ -9,6 +9,15 @@ module.exports = {
 
   async store(req, res) {
     const { name, email, cpf, cellphone, knowledges } = req.body;
+    const formatedKnowledges = knowledges.map((knowledge) =>
+      knowledge.toLowerCase()
+    );
+
+    if (formatedKnowledges.length > 3) {
+      return res.status(500).json({
+        error: "O campo knowledges deve conter no máximo 3 conhecimentos.",
+      });
+    }
 
     try {
       const user = await User.create({
@@ -16,7 +25,7 @@ module.exports = {
         email,
         cpf,
         cellphone,
-        knowledges,
+        knowledges: formatedKnowledges,
         validate: false,
       });
 
