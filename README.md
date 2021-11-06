@@ -9,6 +9,19 @@ O projeto MangaRosa é uma aplicação Node para cadastro de usuários e registr
   - Também, é **preciso** ter um gerenciador de pacotes seja o **[NPM](https://www.npmjs.com/)** ou **[Yarn](https://yarnpkg.com/)**.
   - Em alguns casos é necessario instalar o sequelize-cli globalmente.
 
+Será necessário adicionar um arquivo .ENV com as seguintes variaveis. (Use o .env.example como base).
+
+```
+
+  PORT
+  DB_USER
+  DB_PASSWORD
+  DB_NAME
+  DB_HOST
+  DB_DIALECT
+
+```
+
 Instalar usando npm
 
 ```bash
@@ -26,9 +39,12 @@ Instalar usando yarn
   yarn sequelize db:migrate
   yarn dev
 ```
+
+
+
 ## Rotas
 ##### /nomedocolaborador/registrar POST
-```json
+```
 {
   name,
   email,
@@ -39,12 +55,12 @@ Instalar usando yarn
 }
 ```
 ##### /nome_do_colaborador/validar PUT
-```json
+```
   http://localhost:3333/william_robert/validar
 ```
 
 ##### /registros GET
-```json
+```
   http://localhost:3333/registros
 ```
 
