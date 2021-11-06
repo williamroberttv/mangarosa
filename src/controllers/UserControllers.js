@@ -50,7 +50,7 @@ module.exports = {
       return str;
     }
 
-    const validName = getValidName(name);
+    const validName = getValidName(name.toLowerCase());
     try {
       const { updated_at, validate } = await User.findOne({
         raw: true,
