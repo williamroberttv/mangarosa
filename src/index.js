@@ -1,11 +1,12 @@
 const express = require("express");
+const api = express();
+const cors = require("cors");
+const routes = require("./routes");
 
-const app = express();
-
-app.get("/", (request, response) => {
-  return response.json({ message: "Back-end" });
-});
-
-app.listen(3333, () => {
-  console.log("✔ Back-end iniciou!");
-});
+require("./database");
+api.use(express.json());
+api.use(routes);
+api.use(cors());
+api.listen(process.env.PORT, () =>
+  console.log(`✔ application running on port ${process.env.PORT}`)
+);
