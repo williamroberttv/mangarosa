@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": ""
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
-    "nodemon": "^2.0.14",
     "sequelize-cli": "^6.3.0"
   }
 }
