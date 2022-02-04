@@ -8,6 +8,8 @@ const listOfKnowledges = [
   "banco de dados",
   "typescript",
   "nodejs",
+  "php",
+  "git",
 ];
 
 export function handleKnowledgesValidation(
