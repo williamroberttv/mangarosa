@@ -5,9 +5,12 @@ import { getValidName } from "../utils/nameValidation";
 
 export class UserController {
   async index(req: Request, res: Response) {
-    const users = await User.findAll();
-    console.log(users);
-    return res.json(users);
+    try {
+      const users = await User.findAll();
+      return res.json(users);
+    } catch (err) {
+      return res.status(500).send(err);
+    }
   }
 
   async store(req: Request, res: Response) {
@@ -46,11 +49,11 @@ export class UserController {
         },
       });
       if (user?.validated) {
-        return res.status(500).send({
-          error: "Usuário já registrou o ponto",
-          validated: user?.validated,
-          updatedAt: user?.updatedAt,
-        });
+        return res.status(500).send("Usuário já validado.");
+      }
+
+      if (!user) {
+        return res.status(500).send("Usuário não encontrado.");
       }
 
       const update = () => {
@@ -67,7 +70,7 @@ export class UserController {
 
       return res.status(200).json({ user });
     } catch (err) {
-      return res.status(500).send("Something went wrong!");
+      return res.status(500).send(err);
     }
   }
 }
