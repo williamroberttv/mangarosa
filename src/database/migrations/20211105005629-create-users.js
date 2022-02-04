@@ -28,20 +28,10 @@ module.exports = {
         allowNull: true,
       },
       knowledges: {
-        type: Sequelize.ARRAY(
-          Sequelize.ENUM([
-            "Git",
-            "React",
-            "PHP",
-            "NodeJS",
-            "DevOps",
-            "Banco de Dados",
-            "Typescript",
-          ])
-        ),
+        type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
       },
-      validate: {
+      validated: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
